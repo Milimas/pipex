@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:09:15 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 10:43:43 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:23:17 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_cmd(t_pipe *ps)
 		check_error(-!cmd, "malloc");
 		cmd->index = i;
 		cmd->ps = ps;
-		cmd->args = ft_split(ps->argv[i + 2 + ps->heredoc], ' ');
+		cmd->args = ft_split(ps->argv[i + 2], ' ');
 		if (!cmd->args)
 			exit(EXIT_FAILURE);
 		cmd->next = NULL;
@@ -70,15 +70,12 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipe	ps;
 
-	if (argc < 5)
+	if (argc != 5)
 		exit(2);
 	ps.argc = argc;
 	ps.argv = argv;
-	ps.heredoc = 0;
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
-		ps.heredoc = 1;
 	ps.pipe_count = 2;
-	ps.cmd_count = argc - 3 - ps.heredoc;
+	ps.cmd_count = argc - 3;
 	ps.pipe_fds = malloc(sizeof(int) * ps.pipe_count * 2);
 	ps.paths = get_paths(envp);
 	init_cmd(&ps);

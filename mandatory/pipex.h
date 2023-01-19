@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:06:02 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 05:42:08 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:22:20 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ typedef struct s_pipe
 	int		pipe_count;
 	int		cmd_count;
 	int		*pipe_fds;
-	int		heredoc;
-	int		*heredocfd;
 }	t_pipe;
 
 char	**get_paths(char **envp);
