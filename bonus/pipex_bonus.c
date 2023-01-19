@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:09:15 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 02:02:13 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 05:10:01 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int argc, char **argv, char **envp)
 	t_pipe	ps;
 
 	if (argc < 5)
-		exit(0);
+		exit(2);
 	ps.argc = argc;
 	ps.argv = argv;
 	ps.heredoc = 0;
