@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:09:15 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 11:23:17 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 12:21:21 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_cmd(t_pipe *ps)
 	while (i < ps->cmd_count)
 	{
 		cmd = malloc(sizeof(t_cmd));
-		check_error(-!cmd, "malloc");
+		check_error(-!cmd, "init command", "malloc");
 		cmd->index = i;
 		cmd->ps = ps;
 		cmd->args = ft_split(ps->argv[i + 2], ' ');
@@ -40,7 +40,6 @@ void	execute_all(t_cmd *cmd)
 	{
 		set_input_fd(cmd, cmd->ps);
 		set_output_fd(cmd, cmd->ps);
-		cmd->file = cmd_file(cmd->ps->paths, *cmd->args);
 		execute(cmd);
 		cmd = cmd->next;
 	}

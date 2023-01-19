@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:06:02 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 11:22:20 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 12:16:49 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	free_split(char **split);
 void	execute(t_cmd *cmd);
 t_cmd	*lstlast(t_cmd *lst);
 void	lstadd_back(t_cmd **lst, t_cmd *new);
-int		check_error(int status, char *s);
+int		check_error(int status, char *cmd, char *s);
 void	set_here_doc(t_cmd *cmd, t_pipe *ps);
 void	set_input_fd(t_cmd *cmd, t_pipe *ps);
 void	set_output_fd(t_cmd *cmd, t_pipe *ps);

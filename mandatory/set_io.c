@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 23:13:09 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 11:24:10 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 12:21:44 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_input_fd(t_cmd *cmd, t_pipe *ps)
 {
-	check_error(pipe(ps->pipe_fds + (cmd->index * 2) % 4), "pipe");
+	check_error(pipe(ps->pipe_fds + (cmd->index * 2) % 4), *cmd->args, "pipe");
 	if (cmd->index != 0)
 		cmd->input = *(ps->pipe_fds + (cmd->index * 2 - 2) % 4);
 }

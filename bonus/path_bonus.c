@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 02:58:04 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 02:00:57 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 12:09:57 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ char	*cmd_file(char **envp, char *cmd)
 		free(file);
 		paths++;
 	}
-	ft_putstr_fd("pipex: command not found: ", 2);
+	ft_putstr_fd("pipex: ", 2);
 	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": command not found", 2);
 	ft_putstr_fd("\n", 2);
+	exit(127);
 	return (NULL);
 }
