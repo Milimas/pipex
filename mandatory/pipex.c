@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:09:15 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 05:09:51 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 05:43:33 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	init_cmd(t_pipe *ps)
 		cmd = malloc(sizeof(t_cmd));
 		check_error(-!cmd, "malloc");
 		cmd->index = i;
-		set_input_fd(cmd, ps);
-		set_output_fd(cmd, ps);
+		cmd->ps = ps;
 		cmd->args = ft_split(ps->argv[i + 2 + ps->heredoc], ' ');
 		if (!cmd->args)
 			exit(EXIT_FAILURE);
