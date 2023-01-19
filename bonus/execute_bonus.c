@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 03:12:27 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 06:00:15 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:44:39 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,14 @@ void	execute(t_cmd *cmd)
 	check_error(cmd->cpid, "fork");
 	if (cmd->cpid == 0)
 	{
-		set_input_fd(cmd, cmd->ps);
-		set_output_fd(cmd, cmd->ps);
+		if (cmd->index == cmd->ps->cmd_count - 1)
+			cmd->output = open(cmd->ps->argv[cmd->ps->argc - 1],
+					O_RDWR | O_CREAT | O_APPEND * cmd->ps->heredoc
+					| O_TRUNC * !cmd->ps->heredoc, 0666);
+		if (cmd->index == 0 && !cmd->ps->heredoc)
+			cmd->input = open(cmd->ps->argv[1], O_RDWR, 0666);
+		check_error(cmd->output, "output");
+		check_error(cmd->input, "input");
 		if (access(cmd->file, 0))
 			exit(127);
 		if (cmd->output > -1)

@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:09:15 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 05:43:33 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:43:43 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	init_cmd(t_pipe *ps)
 		cmd->args = ft_split(ps->argv[i + 2 + ps->heredoc], ' ');
 		if (!cmd->args)
 			exit(EXIT_FAILURE);
-		cmd->file = cmd_file(ps->paths, *cmd->args);
 		cmd->next = NULL;
 		lstadd_back(&ps->cmd, cmd);
 		i++;
@@ -39,6 +38,9 @@ void	execute_all(t_cmd *cmd)
 {
 	while (cmd)
 	{
+		set_input_fd(cmd, cmd->ps);
+		set_output_fd(cmd, cmd->ps);
+		cmd->file = cmd_file(cmd->ps->paths, *cmd->args);
 		execute(cmd);
 		cmd = cmd->next;
 	}
@@ -75,7 +77,7 @@ int	main(int argc, char **argv, char **envp)
 	ps.heredoc = 0;
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 		ps.heredoc = 1;
-	ps.pipe_count = argc - 4 - ps.heredoc;
+	ps.pipe_count = 2;
 	ps.cmd_count = argc - 3 - ps.heredoc;
 	ps.pipe_fds = malloc(sizeof(int) * ps.pipe_count * 2);
 	ps.paths = get_paths(envp);
