@@ -61,7 +61,9 @@ $(LIBGNL):
 
 all: $(NAME) bonus
 
-bonus: $(BOBJ) $(LIBFT) $(LIBGNL)
+bonus: $(BNAME)
+
+$(BNAME): $(BOBJ) $(LIBFT) $(LIBGNL)
 	$(CC) $(CFLAGS) $(BOBJ) $(LIBFT) $(LIBGNL) -o $(BNAME)
 
 clean:
