@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:09:15 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 12:22:06 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/20 10:07:09 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 		exit(2);
+	ps.heredoc = 0;
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 		ps.heredoc = 1;
 	if (ps.heredoc && argc < 6)
 		exit(2);
 	ps.argc = argc;
 	ps.argv = argv;
-	ps.heredoc = 0;
 	ps.pipe_count = 2;
 	ps.cmd_count = argc - 3 - ps.heredoc;
 	ps.pipe_fds = malloc(sizeof(int) * ps.pipe_count * 2);
