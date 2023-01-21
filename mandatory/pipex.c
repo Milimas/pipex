@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:09:15 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 12:21:21 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:37:19 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_cmd(t_pipe *ps)
 	ps->cmd = NULL;
 	while (i < ps->cmd_count)
 	{
-		cmd = malloc(sizeof(t_cmd));
+		cmd = calloc(1, sizeof(t_cmd));
 		check_error(-!cmd, "init command", "malloc");
 		cmd->index = i;
 		cmd->ps = ps;
@@ -73,9 +73,10 @@ int	main(int argc, char **argv, char **envp)
 		exit(2);
 	ps.argc = argc;
 	ps.argv = argv;
+	ps.envp = envp;
 	ps.pipe_count = 2;
 	ps.cmd_count = argc - 3;
-	ps.pipe_fds = malloc(sizeof(int) * ps.pipe_count * 2);
+	ps.pipe_fds = ft_calloc(ps.pipe_count * 2, sizeof(int));
 	ps.paths = get_paths(envp);
 	init_cmd(&ps);
 	execute_all(ps.cmd);

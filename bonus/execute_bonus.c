@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 03:12:27 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 12:24:35 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:42:47 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute(t_cmd *cmd)
 	{
 		if (cmd->index == cmd->ps->cmd_count - 1)
 			cmd->output = open(cmd->ps->argv[cmd->ps->argc - 1],
-					O_RDWR | O_CREAT | O_APPEND * cmd->ps->heredoc
+					O_WRONLY | O_CREAT | O_APPEND * cmd->ps->heredoc
 					| O_TRUNC * !cmd->ps->heredoc, 0666);
 		if (cmd->index == 0 && !cmd->ps->heredoc)
 			cmd->input = open(cmd->ps->argv[1], O_RDWR, 0666);
@@ -31,7 +31,8 @@ void	execute(t_cmd *cmd)
 			check_error(dup2(cmd->output, STDOUT_FILENO), "dup", "output");
 		if (cmd->input > -1)
 			check_error(dup2(cmd->input, STDIN_FILENO), "dup", "input");
-		execve(cmd->file, cmd->args, NULL);
+		close(cmd->ps->pipe_fds[0]);
+		execve(cmd->file, cmd->args, cmd->ps->envp);
 		check_error(-1, "execve", *cmd->args);
 	}
 	close(cmd->input);

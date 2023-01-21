@@ -6,7 +6,7 @@
 /*   By: abeihaqi <abeihaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:06:02 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/01/19 12:16:49 by abeihaqi         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:12:56 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_pipe
 {
 	int		argc;
 	char	**argv;
+	char	**envp;
 	t_cmd	*cmd;
 	char	**paths;
 	int		pipe_count;
